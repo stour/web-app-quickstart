@@ -6,11 +6,14 @@ buildscript {
   }
   dependencies {
     classpath "gradle.plugin.com.lv.plugins:gradle-weblogic-plugin:0.4"
+
+    // See https://github.com/Liverpool-Victoria/gradle-weblogic-plugin#usage
+    // This file needs to be generated first using workspace command 'generate Weblogic client'
+    weblogic files('$ML_HOME/wlserver/server/lib/wlfullclient.jar')
   }
 }
 
 apply plugin: "com.lv.weblogic"
-
 apply plugin: 'war'
 
 
