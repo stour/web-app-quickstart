@@ -1,35 +1,46 @@
 buildscript {
-  repositories {
-    maven {
-      url "https://plugins.gradle.org/m2/"
-    }
-  }
-  dependencies {
-    classpath "gradle.plugin.com.lv.plugins:gradle-weblogic-plugin:0.4"
+    repositories {
+        maven { url "file://${projectDir}/libs" }
 
-    // See https://github.com/Liverpool-Victoria/gradle-weblogic-plugin#usage
-    // This file needs to be generated first using workspace command 'generate Weblogic client'
-    weblogic files('$ML_HOME/wlserver/server/lib/wlfullclient.jar')
-  }
+        if( project.hasProperty('internalArtifactRepository') ){
+            maven { url project.internalArtifactRepository }
+        } else {
+            maven { url 'https://plugins.gradle.org/m2/' }
+            mavenCentral()
+        }
+    }
+
+    dependencies {
+        classpath 'gradle.plugin.com.lv.plugins:gradle-weblogic-plugin:0.4'
+    }
 }
 
-apply plugin: "com.lv.weblogic"
 apply plugin: 'war'
-
+apply plugin: 'com.lv.weblogic'
 
 repositories {
-    mavenCentral()
+    if( project.hasProperty('internalArtifactRepository') ){
+        maven { url project.internalArtifactRepository }
+    } else {
+        mavenCentral()
+    }
 }
 
 dependencies {
     compile group: 'commons-io', name: 'commons-io', version: '1.4'
     compile group: 'log4j', name: 'log4j', version: '1.2.15', ext: 'jar'
+
+    // See https://github.com/Liverpool-Victoria/gradle-weblogic-plugin#usage
+    // This file needs to be generated first using workspace command 'generate Weblogic client'
+    weblogic files('$MW_HOME/wlserver/server/lib/wlfullclient.jar')
 }
+
+ext.archiveFile = war.archivePath
 
 weblogic {
 	adminurl = 't3://localhost:7001'
-	deploymentName = 'wepAppQuickstart'
-	source = "${projectDir}/build/libs/web-app-quickstart.war"
+	deploymentName = project.name
+	source = archiveFile
 	targets = 'AdminServer'
 	user = 'weblogic'
 	password = 'codenvy2016'
