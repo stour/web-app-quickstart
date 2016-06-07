@@ -48,3 +48,10 @@ weblogic {
 	upload = true
 	remote = false
 }
+
+task copyRuntimeLibs(type: Copy) {
+    into "$buildDir/libs"
+    from configurations.runtime
+}
+
+build.dependsOn copyRuntimeLibs
