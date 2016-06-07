@@ -37,7 +37,7 @@ dependencies {
 ext.archiveFile = war.archivePath
 
 weblogic {
-	adminurl = 't3://localhost:7001'
+	adminurl = 'localhost:7001'
 	deploymentName = project.name
 	source = archiveFile
 	targets = 'AdminServer'
