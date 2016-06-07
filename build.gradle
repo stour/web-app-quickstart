@@ -31,7 +31,7 @@ dependencies {
     compile group: 'log4j', name: 'log4j', version: '1.2.15', ext: 'jar'
 
     // See https://github.com/Liverpool-Victoria/gradle-weblogic-plugin#usage
-    weblogic files("${projectDir}/libs/wlfullclient-1036.jar")
+    weblogic files("/home/user/weblogic/wlfullclient-1036.jar")
 }
 
 ext.archiveFile = war.archivePath
