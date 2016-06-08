@@ -2,6 +2,6 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src/main/java"/>
-	<classpathentry kind="lib" path="/projects/web-app-quickstart/build/libs/commons-io-1.4.jar"/>
-	<classpathentry kind="lib" path="/projects/web-app-quickstart/build/libs/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="build/libs/commons-io-1.4.jar"/>
+	<classpathentry kind="lib" path="build/libs/log4j-1.2.15.jar"/>
 </classpath>
